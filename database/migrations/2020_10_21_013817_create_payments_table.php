@@ -17,7 +17,7 @@ class CreatePaymentsTable extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('order_id');
-            $table->string('reference', 32);
+            $table->string('reference', 40);
             $table->unsignedInteger('request_id')->nullable()->index();
             $table->tinyInteger('status')->default(PaymentStatus::PENDING);
             $table->string('process_url')->nullable();

@@ -45,12 +45,12 @@
                     <h3 class="text-center text-black-50 h4">Pay with</h3>
                 </div>
                 <div class="col-12 my-3 text-center">
-                    <button
+                    {{--<button
                         data-payment-gateway="{{ \App\Constants\PaymentGateway::PAYMATE }}"
                         class="btn btn-outline-secondary"
                     >
                         @svg('pay-mate', 'w-50')
-                    </button>
+                    </button>--}}
                     <button
                         class="btn btn-dark"
                         data-payment-gateway="{{ \App\Constants\PaymentGateway::PLACETOPAY }}"
@@ -79,17 +79,17 @@
                     </tr>
                     </thead>
                     <tbody>
+                    @foreach($order->payments as $payment)
                     <tr>
-                        <td>{{ \Illuminate\Support\Str::uuid()->toString() }}</td>
-                        <td>{{ \App\Constants\PaymentStatus::STATUSES[0] }}</td>
-                        <td>{{ now()->toDateTimeString() }}</td>
+                        <td>{{ $payment->reference }}</td>
+                        <td>{{ $payment->status_name }}</td>
+                        <td>{{ $payment->created_at->toDateTimeString() }}</td>
                     </tr>
-
+                    @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-
 
 @endsection
