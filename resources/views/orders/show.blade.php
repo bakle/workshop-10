@@ -8,7 +8,7 @@
                     <h1 class="h4 mr-2 d-inline-block">
                         Order #{{ $order->id }}
                     </h1>
-                    <span class="badge badge-pill badge-primary">{{ $order->status() }}</span>
+                    <span class="badge badge-pill badge-primary">{{ $order->status_name }}</span>
                 </div>
                 <div class="col-6 text-right">
                     {{ $order->created_at->toFormattedDateString() }}
