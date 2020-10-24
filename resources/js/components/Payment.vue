@@ -117,7 +117,20 @@ export default {
         payment_gateway: gateway
       })
       .then( ({ data }) => window.location = data.data.process_url  );
+    },
+    getInformation(payment) {
+      axios.get(`/api/payments/${payment}`)
+        .then( ({data}) => { const status = data.data.status; 
+          if (status == 'Pending') {
+            setTimeout(function(){
+              window.location.reload()
+            }, 1000 * 60 * 5);
+          }
+        } )
     }
+  },
+  created() {
+   this.getInformation(this.order.payments.length); 
   }
 }
 </script>
