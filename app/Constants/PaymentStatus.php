@@ -8,4 +8,11 @@ interface PaymentStatus
     public const APPROVED = 1;
     public const DECLINED = 2;
     public const PENDING = 3;
+
+    public const STATUSES = [
+        self::FAILED => 'failed',
+        self::APPROVED => 'approved',
+        self::DECLINED => 'declined',
+        self::PENDING => 'pending',
+    ];
 }
