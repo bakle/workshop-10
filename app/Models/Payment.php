@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use App\Constants\PaymentStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Payment extends Model
 {
@@ -24,5 +26,10 @@ class Payment extends Model
     public function order()
     {
         return $this->belongsTo(Order::class);
+    }
+
+    public function getStatusNameAttribute()
+    {
+        return Str::ucfirst(PaymentStatus::STATUSES[$this->status]);
     }
 }
