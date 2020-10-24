@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Constants\OrderStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Order extends Model
 {
@@ -20,8 +21,8 @@ class Order extends Model
         return $this->hasMany(Payment::class);
     }
 
-    public function status(): string
+    public function getStatusNameAttribute(): string
     {
-        return OrderStatus::STATUSES[$this->status];
+        return Str::ucfirst(OrderStatus::STATUSES[$this->status]);
     }
 }
