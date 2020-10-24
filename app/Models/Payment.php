@@ -32,4 +32,9 @@ class Payment extends Model
     {
         return Str::ucfirst(PaymentStatus::STATUSES[$this->status]);
     }
+
+    public function isPending(): bool
+    {
+        return $this->status === PaymentStatus::PENDING;
+    }
 }

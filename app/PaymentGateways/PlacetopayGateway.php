@@ -3,6 +3,7 @@
 namespace App\PaymentGateways;
 
 use App\Models\Order;
+use App\Models\Payment;
 use Dnetix\Redirection\PlacetoPay;
 use Illuminate\Support\Str;
 
@@ -43,4 +44,17 @@ class PlacetopayGateway
 
         return $this->gateway->request($request);
     }
+
+    public function getPaymentInformation(Payment $payment)
+    {
+        $response = $this->gateway->query($payment->request_id);
+
+        if ($response->isSuccessful()) {
+            return $response;
+        }
+
+        return null;
+    }
+
+
 }
