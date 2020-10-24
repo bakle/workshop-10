@@ -1,5 +1,6 @@
 <?php
 
+use App\Constants\PaymentGateway;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,6 +18,7 @@ class CreatePaymentsTable extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('order_id');
+            $table->enum('gateway', [PaymentGateway::PLACETOPAY, PaymentGateway::PAYMATE]);
             $table->string('reference', 40);
             $table->unsignedInteger('request_id')->nullable()->index();
             $table->tinyInteger('status')->default(PaymentStatus::PENDING);
