@@ -26,6 +26,8 @@ class OrdersController extends Controller
      */
     public function show(Order $order)
     {
+        $order->load('details.product', 'payments');
+
         return view('orders.show')->withOrder($order);
     }
 }
