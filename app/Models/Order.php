@@ -11,6 +11,8 @@ class Order extends Model
 {
     use HasFactory;
 
+    protected $appends = ['status_name'];
+
     public function details()
     {
         return $this->hasMany(OrderDetail::class);
