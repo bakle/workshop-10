@@ -21,7 +21,7 @@ class OrdersController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param Order $order
      * @return \Illuminate\Http\Response
      */
     public function show(Order $order)
