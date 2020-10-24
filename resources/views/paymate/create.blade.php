@@ -14,20 +14,20 @@
                 <div class="col-4">
                     <div class="card">
                         <div class="card-body">
-                            <label class="card-title d-block border-bottom mb-5 font-weight-bold">Order # 246</label>
+                            <label class="card-title d-block border-bottom mb-5 font-weight-bold">Order # {{ $order->id }}</label>
                             <label class="card-subtitle d-block mb-2 text-black-50">
-                                <span class="font-weight-bold">Subtotal:</span> $190,000
+                                <span class="font-weight-bold">Subtotal:</span> ${{ $order->total_price }}
                             </label>
                             <label class="card-subtitle d-block mb-2 text-black-50">
                                 <span class="font-weight-bold">Tax:</span> $0
                             </label>
                             <label class="card-subtitle d-block mb-2 text-black-50">
-                                <span class="font-weight-bold">Total:</span> $190,000
+                                <span class="font-weight-bold">Total:</span> ${{ $order->total_price }}
                             </label>
 
                             <div class="text-right mt-4">
                                 <button class="btn btn-secondary px-4 mr-2">Cancel</button>
-                                <button class="btn btn-primary px-4">Pay</button>
+                                <a class="btn btn-primary px-4" href="{{ route('orders.show', $order->id) }}">Pay</a>
                             </div>
                         </div>
                     </div>

@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,3 +19,10 @@ Route::get('/', function () {
 });
 
 Route::resource('orders', \App\Http\Controllers\OrdersController::class)->only(['index', 'show']);
+
+
+Route::get('paymate', function (Request $request) {
+
+    $order = \App\Models\Order::find($request->input('order_id'));
+    return view('paymate.create')->withOrder($order);
+})->name('paymate.create');

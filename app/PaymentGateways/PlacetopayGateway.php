@@ -7,9 +7,15 @@ use App\Models\Payment;
 use Dnetix\Redirection\PlacetoPay;
 use Illuminate\Support\Str;
 
-class PlacetopayGateway
+class PlacetopayGateway implements PaymentGatewayInterface
 {
     private $gateway;
+
+    private $id;
+
+    private $processUrl;
+
+    private $status;
 
     public function __construct()
     {
@@ -42,19 +48,38 @@ class PlacetopayGateway
             'userAgent' => request()->userAgent()
         ];
 
-        return $this->gateway->request($request);
+        $this->id = $this->gateway->request($request)->requestId;
+        $this->processUrl = $this->gateway->request($request)->processUrl;
+
+        return $this;
     }
 
     public function getPaymentInformation(Payment $payment)
     {
         $response = $this->gateway->query($payment->request_id);
 
+        $this->status = $payment->status_name;
         if ($response->isSuccessful()) {
-            return $response;
+            $this->status = $response->status()->status();
+            return $this;
         }
 
         return null;
     }
 
 
+    public function id(): string
+    {
+        return $this->id;
+    }
+
+    public function processUrl(): string
+    {
+        return $this->processUrl;
+    }
+
+    public function status(): string
+    {
+        return $this->status;
+    }
 }
